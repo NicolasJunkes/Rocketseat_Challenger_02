@@ -77,9 +77,19 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
   const removeProduct = (productId: number) => {
     try {
-      // TODO
-    } catch {
-      // TODO
+      const productExistent = cart.find((item) => productId === item.id);
+
+      if (!productExistent)
+        throw new Error("O produto que deseja ser removido não foi encontrado");
+
+      const removeProduct = cart.filter((product) => product.id !== productId);
+
+      setCart(removeProduct);
+      localStorage.setItem("@RocketShoes:cart", JSON.stringify(removeProduct));
+    } catch (ex) {
+      if (ex instanceof Error) toast.error(ex.message);
+
+      toast.error("Erro na remoção do produto");
     }
   };
 
