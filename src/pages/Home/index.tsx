@@ -59,20 +59,20 @@ const Home = (): JSX.Element => {
 
   return (
     <ProductList>
-      {products.map((item) => {
+      {products.map((product, index) => {
         return (
-          <li>
-            <img src={item.image} alt={item.title} />
-            <strong>{item.title}</strong>
-            <span>{item.priceFormatted}</span>
+          <li key={index.toString()}>
+            <img src={product.image} alt={product.title} />
+            <strong>{product.title}</strong>
+            <span>{product.priceFormatted}</span>
             <button
               type="button"
               data-testid="add-product-button"
-              // onClick={() => handleAddProduct(product.id)}
+              onClick={() => handleAddProduct(product.id)}
             >
               <div data-testid="cart-product-quantity">
                 <MdAddShoppingCart size={16} color="#FFF" />
-                {/* {cartItemsAmount[product.id] || 0} */} 2
+                {cartItemsAmount[product.id] || 0}
               </div>
 
               <span>ADICIONAR AO CARRINHO</span>
